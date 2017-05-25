@@ -7,4 +7,20 @@ output: html_document
 ###A systematic review of positive interactions and the niche in deserts.
 ![](./desert.jpg)  
 
+###Literature search
+```{r, literature, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(DT)
+
+#Search terms####
+search.terms <- read_csv("data/search.terms.csv")
+datatable(search.terms)
+
+#PRISMA####
+#use 'prisma' function from PRISMAstatement 
+#https://cran.r-project.org/web/packages/PRISMAstatement/vignettes/PRISMA.html
+prisma.report <-read_csv("data/prisma.csv")
+prisma.report
+
+```
 
