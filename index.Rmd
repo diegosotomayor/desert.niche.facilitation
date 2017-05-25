@@ -16,11 +16,33 @@ library(DT)
 search.terms <- read_csv("data/search.terms.csv")
 datatable(search.terms)
 
+total.lit <- search.terms %>% filter(search != "final")
+total.lit
+totals <- sum(total.lit$hits)
+final.list <- 53
+totals-final.list
+
+
 #PRISMA####
 #use 'prisma' function from PRISMAstatement 
 #https://cran.r-project.org/web/packages/PRISMAstatement/vignettes/PRISMA.html
 prisma.report <-read_csv("data/prisma.csv")
 prisma.report
+excluded <- prisma.report %>% filter(inclusion == "N")
+dim(excluded)
+
+library(PRISMAstatement)
+
+prisma(found = 153,
+       found_other = 0,
+       no_dupes = 53, 
+       screened = 53, 
+       screen_exclusions = 24, 
+       full_text = 29,
+       full_text_exclusions = 0, 
+       qualitative = 0, 
+       quantitative = 29,
+       width = 800, height = 800)
 
 ```
 
