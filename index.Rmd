@@ -29,11 +29,10 @@ totals-final.list
 #https://cran.r-project.org/web/packages/PRISMAstatement/vignettes/PRISMA.html
 prisma.report <-read_csv("data/prisma.csv")
 prisma.report
-excluded <- prisma.report %>% filter(inclusion == "N")
-dim(excluded)
+exclusions <- prisma.report %>% filter(inclusion == "N") %>% select(ID, category)
+dim(exclusions)
 
 library(PRISMAstatement)
-
 prisma(found = 156,
        found_other = 0,
        no_dupes = 53, 
@@ -44,6 +43,12 @@ prisma(found = 156,
        qualitative = 0, 
        quantitative = 29,
        width = 800, height = 800)
+
+#Summary of exclusions
+categories <- exclusions %>% group_by(category) %>% tally() %>% arrange(desc(n))
+categories
+
+ggplot(categories, aes(category, n)) + geom_bar(stat = "identity") + coord_flip() + ylim(0,10)
 
 ```
 
