@@ -19,6 +19,7 @@ datatable(search.terms)
 total.lit <- search.terms %>% filter(search != "final")
 total.lit
 totals <- sum(total.lit$hits)
+totals
 final.list <- 53
 totals-final.list
 
@@ -33,13 +34,13 @@ dim(excluded)
 
 library(PRISMAstatement)
 
-prisma(found = 153,
+prisma(found = 156,
        found_other = 0,
        no_dupes = 53, 
        screened = 53, 
-       screen_exclusions = 24, 
-       full_text = 29,
-       full_text_exclusions = 0, 
+       screen_exclusions = 0, 
+       full_text = 53,
+       full_text_exclusions = 24, 
        qualitative = 0, 
        quantitative = 29,
        width = 800, height = 800)
