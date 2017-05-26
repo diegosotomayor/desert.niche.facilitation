@@ -1,13 +1,25 @@
 ---
 title: ""
-output: html_document
+output:
+  html_document:
+    theme: yeti
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 <br>  
 
-###A systematic review of positive interactions and the niche in deserts.
-![](./desert.jpg)  
+###Introduction to desert niches
+**A systematic review of positive interactions and the niche in deserts.**  
+The niche is a powerful concept in ecology and at times not entirely coupled to local interactions between species. Herein, we review the capacity for these positive plant interactions to expand the niche of subdominant species. We synthesized the available literature using a formalized systematic review by using the Web of Science and associated terms with niche, positive interactions in plants such as facilitation, and deserts.  
+<br>  
 
-###Literature search
+![](./desert.jpg)  
+<br>
+
+###Literature search & sort
 ```{r, literature, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(DT)
@@ -51,4 +63,11 @@ categories
 ggplot(categories, aes(category, n)) + geom_bar(stat = "identity") + coord_flip() + ylim(0,10)
 
 ```
+
+###Evidence synthesis
+```{r synthesis, warning=FALSE, message=FALSE}
+
+```
+
+###Interpretationn
 
