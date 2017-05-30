@@ -66,6 +66,15 @@ ggplot(categories, aes(category, n)) + geom_bar(stat = "identity") + coord_flip(
 
 ###Evidence synthesis
 ```{r synthesis, warning=FALSE, message=FALSE}
+data <- read_csv("data/data.csv")
+data
+
+#map
+require(ggmap)
+#Map for shrub-contrast paper
+world <-get_googlemap("world", crop= FALSE, zoom = 3)
+p <-ggmap(world)
+p + geom_point(data=data, aes(x=long, y=lat), alpha = .5, size = 2, color = "blue")
 
 ```
 
