@@ -69,12 +69,19 @@ ggplot(categories, aes(category, n)) + geom_bar(stat = "identity") + coord_flip(
 data <- read_csv("data/data.csv")
 data
 
-#map
+#map####
 require(ggmap)
 #Map for shrub-contrast paper
 world <-get_googlemap("world", crop= FALSE, zoom = 3)
 p <-ggmap(world)
 p + geom_point(data=data, aes(x=long, y=lat), alpha = .5, size = 2, color = "blue")
+
+require(maps)
+world<-map_data("world")
+map<-ggplot() + geom_polygon(data=world, colour="gray50", fill="gray50", aes(x=long, y=lat, group=group))
+map + geom_point(data=data, aes(x=long, y=lat))
+
+
 
 ```
 
