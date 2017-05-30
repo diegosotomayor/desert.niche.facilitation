@@ -70,21 +70,17 @@ data <- read_csv("data/data.csv")
 data
 
 #map####
-require(ggmap)
-#Map for shrub-contrast paper
-world <-get_googlemap('world', crop= FALSE, zoom = 3)
-p <-ggmap(world)
-p + geom_point(data=data, aes(x=long, y=lat), alpha = .5, size = 2, color = "blue")
-
 #ggplot2 vers
 require(maps)
 world<-map_data("world")
-map<-ggplot() + geom_polygon(data=world, colour="gray50", fill="gray50", aes(x=long, y=lat, group=group))
-map + geom_point(data=data, aes(x=long, y=lat))
-
-world<-map_data("world")
 map<-ggplot() + geom_polygon(data=world, fill="gray50", aes(x=long, y=lat, group=group))
 map + geom_point(data=data, aes(x=long, y=lat))
+
+#wrangle 
+
+data.simple <- data %>% group_by(niche.concept, ecosystem) %>% count()
+
+ggplot(na.omit(data.simple), aes(niche.concept, n, fill = ecosystem)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues")
 
 
 ```
