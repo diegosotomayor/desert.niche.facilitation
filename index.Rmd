@@ -73,6 +73,10 @@ net.difference <- anti_join(search.1.2, search.1.1, by = "DOI")
 nrow(net.difference) #count of number of differences from consecutive search
 #write_csv(net.difference, "data/net.difference.csv")
 
+#double-check
+net.difference <- anti_join(search.1.2, search.1.1, by = "Title")
+nrow(net.difference)
+
 ```
 
 
