@@ -11,7 +11,7 @@ output:
 ---
 <br>  
 
-###Introduction to desert niches
+###Introduction  
 **A systematic review of positive interactions and the niche in deserts.**  
 The niche is a powerful concept in ecology and at times not entirely coupled to local interactions between species. Herein, we review the capacity for these positive plant interactions to expand the niche of subdominant species. We synthesized the available literature using a formalized systematic review by using the Web of Science and associated terms with niche, positive interactions in plants such as facilitation, and deserts.  
 <br>  
@@ -108,9 +108,10 @@ map + geom_point(data=data, aes(x=long, y=lat)) + labs(x = "longitude", y = "lat
 #data viz
 data.simple <- data %>% group_by(niche.concept, ecosystem) %>% count()
 
-ggplot(na.omit(data.simple), aes(niche.concept, n)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues") + labs(x = "niche concept", y =" count")
+ggplot(na.omit(data.simple), aes(niche.concept, n)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues") + labs(x = "niche concept", y =" frequency")
 
-ggplot(na.omit(data.simple), aes(niche.concept, n, fill = ecosystem)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues") #too many levels
+ggplot(na.omit(data.simple), aes(niche.concept, n, fill = ecosystem)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues") + labs(x = "niche concept", y =" frequency")
+#too many levels
 
 library(stringr)
 data <- data %>% 
@@ -127,13 +128,19 @@ data <- data %>%
 #can also do ifelse() or use replace from dyplr
 
 data.simple <- data %>% group_by(niche.concept, ecosystem) %>% count()
-ggplot(na.omit(data.simple), aes(niche.concept, n, fill = ecosystem)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues")
+
+ggplot(na.omit(data.simple), aes(niche.concept, n, fill = ecosystem)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues") + labs(x = "niche concept", y =" frequency")
+
 
 #now, do we need stats? if more >= 5
 36/5 #yes
 c1<-chisq.test(data.simple$niche.concept, data.simple$n, simulate.p.value = TRUE, B = 10000)
 c1 #n.s.
 
+c1<-chisq.test(data.simple$ecosystem, data.simple$n, simulate.p.value = TRUE, B = 10000)
+c1 #n.s.
+
+#count up levels for summary in results
 n_distinct(data$country)
 n_distinct(data$niche.concept)
 n_distinct(data$ecosystem)
@@ -144,4 +151,5 @@ n_distinct(data$ecosystem)
 ###Interpretation  
 1. Map of world and total of 11 different countries show that concept of niche not extensively tested in field globally.  
 2. A total of 5 distinct niche concepts tested across 12 different ecosystems. This suggests an excellent start to field research on topic at this level with deserts.  
+3. No significant differences between frequencies examined between ecosystem classes or different major niche concepts at this in point (limited number of independent tests).
 
