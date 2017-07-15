@@ -103,16 +103,32 @@ data
 require(maps)
 world<-map_data("world")
 map<-ggplot() + geom_polygon(data=world, fill="gray50", aes(x=long, y=lat, group=group))
-map + geom_point(data=data, aes(x=long, y=lat))
+map + geom_point(data=data, aes(x=long, y=lat)) + labs(x = "longitude", y = "latitude")
 
-#wrangle 
-
+#data viz
 data.simple <- data %>% group_by(niche.concept, ecosystem) %>% count()
 
-ggplot(na.omit(data.simple), aes(niche.concept, n, fill = ecosystem)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues")
+ggplot(na.omit(data.simple), aes(niche.concept, n)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues") + labs(x = "niche concept", y =" count")
+
+ggplot(na.omit(data.simple), aes(niche.concept, n, fill = ecosystem)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues") #too many levels
+
+#data <- data %>% 
+    #rowwise() %>% 
+    #mutate(matches = sub("semi-arid", "semi-arid", ecosystem))    
+
+#now, do we need stats? if more >= 5
+36/5 #yes
+c1<-chisq.test(data.simple$niche.concept, data.simple$n, simulate.p.value = TRUE, B = 10000)
+c1 #n.s.
+
+n_distinct(data$country)
+n_distinct(data$niche.concept)
+n_distinct(data$ecosystem)
 
 
 ```
 
-###Interpretation
+###Interpretation  
+1. Map of world and total of 11 different countries show that concept of niche not extensively tested in field globally.  
+2. A total of 5 distinct niche concepts tested across 12 different ecosystems. This suggests an excellent start to field research on topic at this level with deserts.  
 
