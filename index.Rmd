@@ -112,9 +112,22 @@ ggplot(na.omit(data.simple), aes(niche.concept, n)) + geom_bar(stat = "identity"
 
 ggplot(na.omit(data.simple), aes(niche.concept, n, fill = ecosystem)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues") #too many levels
 
-#data <- data %>% 
-    #rowwise() %>% 
-    #mutate(matches = sub("semi-arid", "semi-arid", ecosystem))    
+library(stringr)
+data <- data %>% 
+    rowwise() %>% 
+    mutate(matches = str_replace(ecosystem,"^semi-arid.+", "semi-arid"))
+
+data <- data %>% 
+    rowwise() %>% 
+    mutate(ecosystem = str_replace(ecosystem,"^semi-arid.+", "semi-arid")) %>% 
+    mutate(ecosystem = str_replace(ecosystem,"^arid.+", "arid")) %>%
+    mutate(ecosystem = str_replace(ecosystem,"^open.+", "other")) %>%
+    mutate(ecosystem = str_replace(ecosystem,"^woodland.+", "other")) %>%
+    mutate(ecosystem = str_replace(ecosystem,"^sub.+", "other"))
+#can also do ifelse() or use replace from dyplr
+
+data.simple <- data %>% group_by(niche.concept, ecosystem) %>% count()
+ggplot(na.omit(data.simple), aes(niche.concept, n, fill = ecosystem)) + geom_bar(stat = "identity") + coord_flip() + scale_fill_brewer(palette = "Blues")
 
 #now, do we need stats? if more >= 5
 36/5 #yes
