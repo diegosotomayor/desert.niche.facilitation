@@ -45,6 +45,7 @@ exclusions <- prisma.report %>% filter(inclusion == "N") %>% select(ID, category
 dim(exclusions)
 
 library(PRISMAstatement)
+#first search (2015)
 prisma(found = 156,
        found_other = 0,
        no_dupes = 53, 
@@ -54,6 +55,18 @@ prisma(found = 156,
        full_text_exclusions = 24, 
        qualitative = 0, 
        quantitative = 29,
+       width = 800, height = 800)
+
+#second search (2017)
+prisma(found = 196,
+       found_other = 0,
+       no_dupes = 70, 
+       screened = 70, 
+       screen_exclusions = 0, 
+       full_text = 70,
+       full_text_exclusions = 34, 
+       qualitative = 0, 
+       quantitative = 36,
        width = 800, height = 800)
 
 #Summary of exclusions
