@@ -147,7 +147,7 @@ n_distinct(data$ecosystem)
 
 ```
 
-###Evidence
+###Meta-analysis
 ```{r, evidence, warning=FALSE, message=FALSE}
 #data from within each study
 data <- read_csv("data/evidence.csv")
