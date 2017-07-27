@@ -92,9 +92,8 @@ nrow(net.difference)
 
 ```
 
-
-###Evidence synthesis
-```{r synthesis, warning=FALSE, message=FALSE}
+###Systematic review
+```{r review, warning=FALSE, message=FALSE}
 data <- read_csv("data/data.csv")
 data
 
@@ -148,8 +147,30 @@ n_distinct(data$ecosystem)
 
 ```
 
+###Evidence
+```{r, evidence, warning=FALSE, message=FALSE}
+#data from within each study
+data <- read_csv("data/evidence.csv")
+data <- data[!is.na(data$p), ]
+
+#libary to use p-values for meta-analytic stats
+library(metap)
+schweder(data$p) # to explore validity of p-values to capture sense of whether it is a set of relatively small or large p-values as different combining probability tests have different assumptions.
+
+sumz(p, data = data) #sumz assumes equal emphasis of large and small p-values
+sumz(p, weights = n.reps, data = data) #weight by sample sizes
+
+#then repeat for each hypothesis/niche.concept separately once all p-values collected
+
+sumlog(data$p) #emphasis on small p-values and also known as Fisher’s method (most common combining probabitlities method) good general check
+
+```
+
+<br>  
+
 ###Interpretation  
 1. Map of world and total of 11 different countries show that concept of niche not extensively tested in field globally.  
 2. A total of 5 distinct niche concepts tested across 12 different ecosystems. This suggests an excellent start to field research on topic at this level with deserts.  
-3. No significant differences between frequencies examined between ecosystem classes or different major niche concepts at this in point (limited number of independent tests).
+3. No significant differences between frequencies examined between ecosystem classes or different major niche concepts at this in point (limited number of independent tests).  
+4. There was extensive variation in how the niche was tested within deserts within the context of positive interactions. The statistical tests were simple and relatively under-reported. The variation in measures precluded an effect size meta-analysis. Consequently, a combining p-value meta-analysis was done.
 
