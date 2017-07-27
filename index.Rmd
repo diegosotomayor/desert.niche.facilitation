@@ -162,6 +162,9 @@ sumz(p, weights = n.reps, data = data) #weight by sample sizes
 
 #then repeat for each hypothesis/niche.concept separately once all p-values collected
 
+#sumz(p[niche.concept], data = data)
+#sumz(data$p[niche.concept])
+
 sumlog(data$p) #emphasis on small p-values and also known as Fisher’s method (most common combining probabitlities method) good general check
 
 ```
