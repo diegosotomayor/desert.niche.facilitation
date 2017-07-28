@@ -147,7 +147,16 @@ n_distinct(data$ecosystem)
 
 ```
 
-###Meta-analysis
+###Meta-analysis  
+The variation in methods, measrues, and reporting was to variable between and within studies within each major class of niche hypothesis. Hence, p-values with sample size estimates were extracted in all available instances.
+
+**Decision rules for selecting p-values**  
+1. A p-value listed for the relevant process associated with the niche.  For instance, there can be multiple measures tested and p-values reported. In this instance, extract the p-value most directly associated with the major niche concept.  If there were different sections within results, the section entitle niche was inspect in most detail.  
+2. Record n for total number of fully independent samples.  For instance, the number of individual plants was sometimes listed as 1000 but there were only 8 plots.  Record n.reps as 8.  
+3. The number of species is the number of species directly tested associated with the niche hypothesis only.  
+4. If multiple responses were recorded and all were relevant to the niche hypothesis, select the p-max and/or measure that the authors interpreted as support for the mechanism.
+
+
 ```{r, evidence, warning=FALSE, message=FALSE}
 #data from within each study
 data <- read_csv("data/evidence.csv")
