@@ -93,6 +93,9 @@ nrow(net.difference)
 ```
 
 ###Systematic review
+
+![](./definitions.png)
+
 ```{r review, warning=FALSE, message=FALSE}
 data <- read_csv("data/data.csv")
 data
